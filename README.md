@@ -15,3 +15,4 @@ Design:
 
 Results:
 - Mixed
+- Is it surprising that these events didn't have an impact on public opinion?
