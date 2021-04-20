@@ -10,6 +10,7 @@
 # Swiss Leaks: February 2015
 # Panama Papers: 3 April 2016
 # Paradise Papers: 5 November 2017
+# FinCEN Papers: 15 August 2020 
 
 # Get German survey data and add, cut Libor
 
@@ -382,8 +383,12 @@ ggplot(temp, aes(y = as.factor(labels), x = coef)) +
   geom_point(data=temp[temp$pvalue<=0.05,], size = 3) + geom_errorbarh(data=temp[temp$pvalue<=0.05,], aes(xmin = min, xmax = max), size = 0.25, height = 0) +
   geom_vline(xintercept = 0, linetype = 'dashed', colour = 'grey') +
   theme_bw() +
-  ylab('Country') + xlab('Standardised coefficients') + ggtitle("Major companies") +
-  facet_grid(rows = vars(event), scales = 'free_y', space = 'free_y') #-> Confidence_plot
+  ylab('Country') + xlab('Standardised coefficients') + labs(title = "Impact of MegaLeaks on trust in major companies",
+                                                             caption = "Notes: Models include controls for age, gender, income and education.") +
+  facet_grid(rows = vars(event), scales = 'free_y', space = 'free_y') +
+  theme(plot.title.position = "plot",
+        plot.caption.position =  "plot",
+        plot.caption = element_text(hjust = 0)) #-> Confidence_plot
 
 Output[Output$variable == "Social trust",] -> temp
 ggplot(temp, aes(y = as.factor(labels), x = coef)) +
@@ -391,8 +396,12 @@ ggplot(temp, aes(y = as.factor(labels), x = coef)) +
   geom_point(data=temp[temp$pvalue<=0.05,], size = 3) + geom_errorbarh(data=temp[temp$pvalue<=0.05,], aes(xmin = min, xmax = max), size = 0.25, height = 0) +
   geom_vline(xintercept = 0, linetype = 'dashed', colour = 'grey') +
   theme_bw() +
-  ylab('Country') + xlab('Standardised coefficients') + ggtitle('Trust') +
-  facet_grid(rows = vars(event), scales = 'free_y', space = 'free_y') #-> Trust_plot
+  ylab('Country') + xlab('Standardised coefficients') + labs(title = 'Impact of MegaLeaks on generalised social trust',
+                                                             caption = 'Notes: Models include controls for age, gender, income and education.') +
+  facet_grid(rows = vars(event), scales = 'free_y', space = 'free_y') +
+  theme(plot.title.position = "plot",
+        plot.caption.position =  "plot",
+        plot.caption = element_text(hjust = 0)) #-> Trust_plot
 
 Output[Output$variable == "Left-Right",] -> temp
 ggplot(temp, aes(y = as.factor(labels), x = coef)) +
@@ -400,8 +409,12 @@ ggplot(temp, aes(y = as.factor(labels), x = coef)) +
   geom_point(data=temp[temp$pvalue<=0.05,], size = 3) + geom_errorbarh(data=temp[temp$pvalue<=0.05,], aes(xmin = min, xmax = max), size = 0.25, height = 0) +
   geom_vline(xintercept = 0, linetype = 'dashed', colour = 'grey') +
   theme_bw() +
-  ylab('Country') + xlab('Standardised coefficients') + ggtitle("Left-Right") +
-  facet_grid(rows = vars(event), scales = 'free_y', space = 'free_y') #-> LR_plot
+  ylab('Country') + xlab('Standardised coefficients') + labs(title = "Impact of MegaLeaks on Left/Right self-placement",
+                                                             caption = "Notes: Models include controls for age, gender, income and education.") +
+  facet_grid(rows = vars(event), scales = 'free_y', space = 'free_y') +
+  theme(plot.title.position = "plot",
+        plot.caption.position =  "plot",
+        plot.caption = element_text(hjust = 0)) #-> LR_plot
 
 # to remove facet_grid labels: theme(strip.background = element_blank(), strip.text = element_blank())
 
@@ -464,7 +477,7 @@ ggplot(Output, aes(y = as.factor(Parameter), x = Coefficient)) +
   geom_vline(xintercept = 0, linetype = 'dashed', colour = 'grey') +
   theme_bw() +
   ylab('Month of Data Leak') + xlab("Coefficients with 95% cluster-robust confidence intervals") + 
-  labs(title = "Figure 4: The impact of data leaks on Google search activity", caption = "Notes: Estimated effect on monthly Google search activity for each topic listed. Models estimated with country level fixed effects, \ncountry-specific linear trends and cluster robust standard errors.") +
+  labs(title = "Impact of MegaLeaks on Google search activity", caption = "Notes: Estimated effect on monthly Google search activity for each topic listed. Models estimated with country level fixed effects, \ncountry-specific linear trends and cluster robust standard errors.") +
   facet_grid(rows = vars(search), scales = 'free_y', space = 'free_y') +
   theme(plot.title.position = "plot",
         plot.caption.position =  "plot",
