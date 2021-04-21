@@ -17,4 +17,5 @@ Results:
 - Mixed
 - Is it surprising that these events didn't have an impact on public opinion?
 
+https://raw.githubusercontent.com/MatteoTiratelli/MegaLeaksPublicOpinion/main/Screenshot%202021-04-21%20at%2010.22.47.png
 https://raw.githubusercontent.com/MatteoTiratelli/MegaLeaksPublicOpinion/main/Results.pdf
