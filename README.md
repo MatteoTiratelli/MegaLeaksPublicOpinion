@@ -17,5 +17,5 @@ Results:
 - Mixed... (nb positive numbers for estimated treatment effects mean less trust & more right wing)
 - Is it surprising that these events didn't have an impact on public opinion?
 
-![Graphs of results of preliminary analysis](https://raw.githubusercontent.com/MatteoTiratelli/MegaLeaksPublicOpinion/main/Screenshot%202021-04-21%20at%2010.22.47.png)
+![Graphs of results of preliminary analysis](https://raw.githubusercontent.com/MatteoTiratelli/MegaLeaksPublicOpinion/main/Results.png)
 
