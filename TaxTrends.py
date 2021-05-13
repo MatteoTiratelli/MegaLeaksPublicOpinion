@@ -17,8 +17,13 @@ Countries = ["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","A
 "SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","ST","SS","SV","SX","SY","SZ",
 "TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG",
 "UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","YE","YT","ZA","ZM","ZW"]
-SearchCode = ['/m/0261x8t', '/m/03d8n5x', '/m/01z302']
-Labels = ['Kim Kardashian', 'Tax Evasion', 'Tax Haven']
+
+OECD_codes = ["AU","AT","BE","CA","CL","CO","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE",
+"IL","IT","JP","KR","LV","LT","LU","MX","NL","NZ","NO","PL","PT","SK","SI","ES",
+"SE","CH","TR","GB","US"]
+
+SearchCode = ['/m/03d8n5x', '/m/01z302']
+Labels = ['Tax Evasion', 'Tax Haven']
 
 pytrends = TrendReq()
 
@@ -35,7 +40,4 @@ for v, l in zip(SearchCode, Labels):
             print(f"{l}{i} not downloaded because of the following error:" + str(e))
         continue
     df = pd.concat(temp)
-    df.to_csv(f"/Users/matteo/Downloads/{l}.csv")
-
-
-
+    df.to_csv(f"/Users/XXXXXXX/Downloads/{l}.csv") ## This line needs editing to where you want to save your data
