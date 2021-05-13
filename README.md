@@ -1,4 +1,4 @@
-# Did financial #MegaLeaks impact public opinion?
+# Do "mega leaks" about corruption, money laundering and tax evasion change public opinion?
 
 Events:
 - Offshore Leaks: April 2013
@@ -17,5 +17,4 @@ Results:
 - Mixed... (nb positive numbers for estimated treatment effects mean less trust & more right wing)
 - Is it surprising that these events didn't have an impact on public opinion?
 
-![Graphs of results of preliminary analysis](https://raw.githubusercontent.com/MatteoTiratelli/MegaLeaksPublicOpinion/main/Results.png)
-
+![Graphs of results from preliminary analysis](https://raw.githubusercontent.com/MatteoTiratelli/MegaLeaksPublicOpinion/main/Results.png)
