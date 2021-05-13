@@ -49,8 +49,8 @@
 # Section 2: Libor-GSS
 # Section 3: LuxLeaks-ESS
 # Section 4: Paradise-EVS
-# Section 5: Google Trends
-# Section 6: Tables and figures
+# Section 5: Figures
+# Section 6: Google Trends
 
 ## Each section begins with the data cleaning, and then proceeds to the regression analysis
 # apart from the final section which builds the figures from the earlier regression analyses
@@ -481,33 +481,4 @@ ggplot(Output, aes(y = as.factor(Parameter), x = Coefficient)) +
   theme(plot.title.position = "plot",
         plot.caption.position =  "plot",
         plot.caption = element_text(hjust = 0)) -> GooglePlot
-
-
-#### Handsard
-
-Hansard <- read_html("https://hansard.parliament.uk/search/Contributions?endDate=2020-11-01&searchTerm=tax+haven&startDate=2012-01-01")
-
-Hansard %>% 
-  html_node("main#main-content") %>%
-  html_text("div.search-results") %>%
-  html_nodes("div.tertiary-info") %>%
-  html_text()
- ### NOT WORKING
-
-TRY PYTHON???
-  
-  import requests
-from bs4 import BeautifulSoup
-import csv
-import unicodecsv as csv
-
-url = 'https://hansard.parliament.uk/search/Contributions?endDate=2020-11-01&searchTerm=tax+haven&startDate=2012-01-01'
-response = requests.get(url)
-html = response.content
-soup = BeautifulSoup(html, "html.parser")
-list = soup.find("div", class_='card-list')
-dates = list.findAll("div", class_="tertiary-info)
                      
-  
-
-
