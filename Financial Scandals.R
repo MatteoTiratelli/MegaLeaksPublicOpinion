@@ -429,28 +429,27 @@ ggplot(temp, aes(y = as.factor(labels), x = coef)) +
 
 ## Google trends
 
-files <- c("Tax Evasion.csv", "Tax Haven.csv", "Kim Kardashian.csv")
-labels <- c("Tax Evasion", "Tax Haven", "Placebo")
-OECD <- c("AU","AT","BE","CA","CL","CO","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE",
-          "IL","IT","JP","KI","LV","LT","LU","MX","NL","NZ","NO","PL","PT","SX","SI","ES",
-          "SE","CH","TR","AE","TZ")
+labels <- c("Tax Evasion", "Tax Haven")
+OECD = c("AU","AT","BE","CA","CL","CO","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE",
+         "IL","IT","JP","KR","LV","LT","LU","MX","NL","NZ","NO","PL","PT","SK","SI","ES",
+         "SE","CH","TR","GB","US")
 dates <- c(#'2012-06-01',  # Libor 
-           '2013-04-01',  # Offshore Leaks
-           '2014-11-01',  # Lux Leaks
-           '2015-02-01',  # Swiss Leaks
-           '2016-04-01',  # Panama Papers
-           '2017-11-01',  # Paradise Papers
-           '2020-08-15')  # FinCEN Papers
+  '2013-04-01',  # Offshore Leaks
+  '2014-11-01',  # Lux Leaks
+  '2015-02-01',  # Swiss Leaks
+  '2016-04-01',  # Panama Papers
+  '2017-11-01',  # Paradise Papers
+  '2020-08-15')  # FinCEN Papers
 
 Output <- tibble(Parameter = character(), Coefficient = numeric(), 
                  CI_low = numeric(), CI_high = numeric(), p = numeric(), search = character())
 
-for (i in 1:3){
+for (i in 1:2){
   GoogleTrend <- read.csv(files[i])
-  GoogleTrend$date <- as.POSIXct(GoogleTrend$date)
-  GoogleTrend$Treatment <- ifelse(as.character(GoogleTrend$date) %in% dates,1,0)
   names(GoogleTrend)[1] <- "geo"
+  names(GoogleTrend)[2] <- "date"
   names(GoogleTrend)[3] <- "hits"
+  GoogleTrend$Treatment <- ifelse(as.character(GoogleTrend$date) %in% dates,1,0)
   GoogleTrend <- GoogleTrend[GoogleTrend$geo %in% OECD,]
   GoogleTrend %>%
     group_by(geo) %>%
@@ -458,8 +457,8 @@ for (i in 1:3){
            lag = dplyr::lag(Treatment, n = 1, default = NA),
            lead = dplyr::lead(Treatment, n = 1, default = NA)) -> GoogleTrend
   model <- lm(hits ~ factor(lag) + factor(Treatment) + 
-                          factor(lead) + factor(geo)*trend + factor(geo), 
-                        data = GoogleTrend)
+                factor(lead) + factor(geo)*trend + factor(geo), 
+              data = GoogleTrend)
   mp <- model_parameters(model, robust = TRUE, vcov_estimation = "CL", vcov_type = "HC1", vcov_args = list(cluster = GoogleTrend$geo))
   results <- as_tibble(mp[2:4,])
   results <- results[,c(1,2,4,5,8)]
@@ -476,8 +475,8 @@ ggplot(Output, aes(y = as.factor(Parameter), x = Coefficient)) +
   geom_point(size = 3) + geom_errorbarh(aes(xmin = CI_low, xmax = CI_high), size = 0.2, height = 0) +
   geom_vline(xintercept = 0, linetype = 'dashed', colour = 'grey') +
   theme_bw() +
-  ylab('Month of Data Leak') + xlab("Coefficients with 95% cluster-robust confidence intervals") + 
-  labs(title = "Impact of MegaLeaks on Google search activity", caption = "Notes: Estimated effect on monthly Google search activity for each topic listed. Models estimated with country level fixed effects, \ncountry-specific linear trends and cluster robust standard errors.") +
+  ylab('Month of Data Leak') + xlab("Estimated effects with 95% cluster-robust confidence intervals") + 
+  labs(title = "Impact of MegaLeaks on Google search activity in OECD countries", caption = "Notes: Estimated effect on monthly Google search activity for each topic listed. Models estimated with country level fixed effects, \ncountry-specific linear trends and cluster robust standard errors.") +
   facet_grid(rows = vars(search), scales = 'free_y', space = 'free_y') +
   theme(plot.title.position = "plot",
         plot.caption.position =  "plot",
